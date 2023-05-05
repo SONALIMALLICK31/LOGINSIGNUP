@@ -1,4 +1,6 @@
 import React from "react";
+import { useState, useEffect } from 'react';
+import Ionicons from "react-native-vector-icons/Ionicons";
 import {
   StyleSheet,
   Text,
@@ -9,34 +11,74 @@ import {
 } from "react-native";
 export default function Login({navigation}) {
 
+  const [seePassword, setSeePassword] = useState(true);
+  const [password, setpassword] = useState('');
+
+
   return (
     <View style={[styles.container]}>
 
-      <View>
-        <Text style={styles.text1}>Hii User!</Text>
+      <View style={styles.header}>
+
+        <Image source={require('./assets/logo1.png')}
+          style={styles.logo} />
+
+        <Text style={styles.text1}>Heal Acres</Text>
       </View>
-      {/* <Image
-        style={styles.stretch}
-        resizeMode="contain"
-      source={require('./assets/favicon.png')}
-      /> */}
+
+      
+
       <View style={styles.container1}>
 
         <Text style={styles.text}>LOGIN</Text>
+        <View style={styles.title}>
 
-        <TextInput
-          style={styles.input}
-          placeholder='Enter Your Email'
-          placeholderTextColor='#87BEFF'
-        />
+          <TextInput
+            style={styles.input}
+            placeholder='Email'
+            placeholderTextColor='#87BEFF'
+            maxLength={30}
+          />
+          <View style={styles.icon}>
 
-        <TextInput
-          style={styles.input}
-          placeholder='Enter Your Password'
-          placeholderTextColor='#87BEFF'
-          maxLength={8}
-        />
+            <Ionicons
+              name="mail"
+              size={25}
+              color={'#87BEFF'}
+              right={20}
+            />
+          </View>
+        </View>
 
+
+        <View style={styles.title}>
+          <TextInput
+            value={password}
+            style={styles.input}
+            placeholder='Password'
+            placeholderTextColor='#87BEFF'
+            maxLength={9}
+            secureTextEntry={seePassword}
+            keyboardType="default"
+            onPress={() => setSeePassword(!seePassword)}
+            onChangeText={setpassword}
+            
+          />
+          <View style={styles.icon}>
+            <TouchableOpacity
+              onPress={() => {
+                setSeePassword(!seePassword);
+              }}>
+              <Ionicons
+                name={seePassword === true ? 'eye-off' : 'eye'}
+                size={25}
+                color={'#87BEFF'}
+                right={20}
+              />
+            </TouchableOpacity>
+          </View>
+        </View>
+       
         <TouchableOpacity >
           <Text style={styles.forgotPassword}> Forgot Password ?</Text>
         </TouchableOpacity>
@@ -104,9 +146,9 @@ const styles = StyleSheet.create({
   },
   text1: {
     color: '#ffffff',
-    fontSize: 40,
+    fontSize: 38,
     fontWeight: 'bold',
-    paddingVertical:30,
+    paddingVertical:10,
     textAlign:"center",
   },
   forgotPassword: {
@@ -126,25 +168,7 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     color:"#87BEFF",
   },
-  input: {
-    //backgroundColor: '#ffffff',
-    color: '#87BEFF',
-    marginLeft: 0,
-    //width: 270,
-    marginVertical: "2%",
-    borderWidth: 0,
-    borderBottomWidth:1,
-    //borderRadius:4,
-    borderColor: "black",
-    fontSize: 20,
-    fontWeight:"bold",
-    letterSpacing: 1,
-    //paddingHorizontal: 10,
-    //paddingVertical: 0,
-    //marginBottom:0,
-    
-    
-  },
+  
   btn: {
     width: 225,
     height: 35,
@@ -183,5 +207,49 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     letterSpacing: 2,
     //fontStyle: "italic",
+  },
+
+  logo: {
+    width:150,
+    height:"100%",
+    //position:"absolute",
+  },
+
+  header: {
+    width:250,
+    height:100,
+    //backgroundColor:"red",
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection:"row",
+    paddingRight:40,
+
+  },
+  icon: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    width: '10%',
+    //paddingRight: 10,
+    //backgroundColor:"red",
+    right:10,
+  },
+  title:{
+    flexDirection:"row",
+    //backgroundColor:"blue",
+  },
+  input: {
+    //backgroundColor: 'green',
+    color: '#87BEFF',
+    //width: 270,
+    marginVertical: "2%",
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    //borderRadius:4,
+    borderColor: "black",
+    fontSize: 20,
+    fontWeight: "bold",
+    letterSpacing: 1,
+    width: '100%',
   },
 })
